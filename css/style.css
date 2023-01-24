@@ -128,6 +128,99 @@ svg path {
   padding: 0 0.9375rem;
 }
 
+body::after {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  -webkit-transition: opacity 0.8s ease 0s;
+  -o-transition: opacity 0.8s ease 0s;
+  transition: opacity 0.8s ease 0s;
+  pointer-events: none;
+  z-index: 149;
+}
+
+.popup-show body::after {
+  opacity: 1;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 30px 10px;
+  -webkit-transition: visibility 0.8s ease 0s;
+  -o-transition: visibility 0.8s ease 0s;
+  transition: visibility 0.8s ease 0s;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.popup_show {
+  z-index: 150;
+  visibility: visible;
+  overflow: auto;
+  pointer-events: auto;
+}
+
+.popup_show .popup__content {
+  visibility: visible;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+}
+
+.popup__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  align-items: center;
+}
+
+.popup__content {
+  visibility: hidden;
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: -webkit-transform 0.3s ease 0s;
+  transition: -webkit-transform 0.3s ease 0s;
+  -o-transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
+  padding: 20px;
+  width: 100%;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 0px 35px rgba(212, 20, 90, 0.25);
+          box-shadow: 0px 0px 35px rgba(212, 20, 90, 0.25);
+  border-radius: 15px;
+}
+
+.lock .popup__content {
+  visibility: visible;
+}
+
 [class*=-ibg] {
   position: relative;
 }
@@ -145,6 +238,58 @@ svg path {
 [class*=-ibg_contain] img {
   -o-object-fit: contain;
      object-fit: contain;
+}
+
+.button {
+  padding: 0.9375rem 2.375rem;
+  background: -o-linear-gradient(354.8deg, #B90160 2.23%, #2E3192 99.51%);
+  background: linear-gradient(95.2deg, #B90160 2.23%, #2E3192 99.51%);
+  border-radius: 7px;
+  font-weight: 900;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  text-align: center;
+  color: #FFFFFF;
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.order-form__title {
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.18;
+  text-align: center;
+}
+
+.form__body {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(auto, 360px))[2];
+  grid-template-columns: repeat(2, minmax(auto, 360px));
+  gap: 1.5625rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.form__button {
+  padding: 0.625rem 2.25rem;
+}
+
+.input,
+.area {
+  width: 100%;
+  padding: 0.8125rem 1rem;
+  background: #FFFFFF;
+  border: 1px solid #A2A2A2;
+  border-radius: 9px;
+  font-weight: 300;
+  color: #989898;
+}
+
+.area {
+  max-height: 5.625rem;
 }
 
 .header {
@@ -389,18 +534,7 @@ svg path {
 .main__button {
   -ms-flex-item-align: start;
       align-self: flex-start;
-  padding: 0.9375rem 2.375rem;
-  background: -o-linear-gradient(354.8deg, #B90160 2.23%, #2E3192 99.51%);
-  background: linear-gradient(95.2deg, #B90160 2.23%, #2E3192 99.51%);
-  border-radius: 7px;
-  font-weight: 900;
-  font-size: 1.25rem;
-  line-height: 1.15;
-  text-align: center;
-  color: #FFFFFF;
-  -webkit-transition: all 0.3s ease 0s;
-  -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+  text-transform: uppercase;
 }
 
 .main__image-ibg {
@@ -439,11 +573,22 @@ svg path {
   font-style: italic;
   font-weight: 900;
   line-height: 1.16;
-  -webkit-transition: -webkit-text-decoration 0.5s ease 0s;
-  transition: -webkit-text-decoration 0.5s ease 0s;
-  -o-transition: text-decoration 0.5s ease 0s;
-  transition: text-decoration 0.5s ease 0s;
-  transition: text-decoration 0.5s ease 0s, -webkit-text-decoration 0.5s ease 0s;
+  position: relative;
+}
+
+.logo-main__text:after {
+  content: "";
+  position: absolute;
+  bottom: -0.625rem;
+  left: 0;
+  width: 50%;
+  height: 0.25rem;
+  background: -o-linear-gradient(354.8deg, #B90160 2.23%, #2E3192 99.51%);
+  background: linear-gradient(95.2deg, #B90160 2.23%, #2E3192 99.51%);
+  border-radius: 0.1875rem;
+  -webkit-transition: all 0.2s ease 0s;
+  -o-transition: all 0.2s ease 0s;
+  transition: all 0.2s ease 0s;
 }
 
 .menu__list {
@@ -498,7 +643,7 @@ svg path {
 }
 
 .what__title {
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.16;
   text-align: center;
 }
@@ -556,7 +701,7 @@ svg path {
 }
 
 .what__caption {
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.16;
   text-transform: uppercase;
 }
@@ -650,10 +795,22 @@ svg path {
       -ms-flex-positive: 1;
           flex-grow: 1;
   text-align: center;
+  position: relative;
 }
 
 .swiper-slide__text:not(:last-child) {
   margin-bottom: 1.25rem;
+}
+
+.swiper-slide__text:after {
+  content: "";
+  position: absolute;
+  bottom: -0.625rem;
+  left: 25%;
+  width: 50%;
+  height: 0.125rem;
+  background: -o-linear-gradient(354.8deg, #B90160 2.23%, #2E3192 99.51%);
+  background: linear-gradient(95.2deg, #B90160 2.23%, #2E3192 99.51%);
 }
 
 .swiper-slide__author {
@@ -662,16 +819,6 @@ svg path {
   line-height: 1.16;
   text-align: center;
   color: #8E8E8E;
-}
-
-.swiper-slide__author:before {
-  content: "";
-  top: 0;
-  left: 0;
-  width: 8.125rem;
-  height: 0.125rem;
-  background: -o-linear-gradient(354.8deg, #B90160 2.23%, #2E3192 99.51%);
-  background: linear-gradient(95.2deg, #B90160 2.23%, #2E3192 99.51%);
 }
 
 .swiper {
@@ -724,6 +871,10 @@ svg path {
 }
 
 @media (min-width: 47.99875em) {
+  .form__line_area {
+    grid-column-start: span 2;
+  }
+
   .main__body {
     -webkit-box-flex: 0;
         -ms-flex: 0 1 55%;
@@ -749,6 +900,18 @@ svg path {
 }
 
 @media (min-width: 76.625em) {
+  .popup__content {
+    max-width: 73.75rem;
+  }
+
+  .order-form__title:not(:last-child) {
+    margin-bottom: 2.8125rem;
+  }
+
+  .form__body:not(:last-child) {
+    margin-bottom: 2.8125rem;
+  }
+
   .footer {
     margin-top: 9.375rem;
   }
@@ -783,12 +946,24 @@ svg path {
 }
 
 @media (max-width: 20em) {
-  .footer {
-    margin-top: 2.5rem;
+  .popup__content {
+    max-width: 16.6875rem;
+  }
+
+  .order-form__title:not(:last-child) {
+    margin-bottom: 0.9375rem;
+  }
+
+  .form__body:not(:last-child) {
+    margin-bottom: 0.9375rem;
   }
 
   .footer {
-    margin-bottom: 1.875rem;
+    margin-top: 0.9375rem;
+  }
+
+  .footer {
+    margin-bottom: 1.25rem;
   }
 
   .main__title {
@@ -800,7 +975,7 @@ svg path {
   }
 
   .what {
-    margin-bottom: 6.25rem;
+    margin-bottom: 3.125rem;
   }
 
   .what__title {
@@ -808,11 +983,11 @@ svg path {
   }
 
   .what__title {
-    margin-bottom: 3.75rem;
+    margin-bottom: 1.25rem;
   }
 
   .what__caption {
-    font-size: 1.875rem;
+    font-size: 1.25rem;
   }
 }
 
@@ -852,6 +1027,12 @@ svg path {
 }
 
 @media (max-width: 47.99875em) {
+  .form__body {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
   .header {
     padding-top: 0.625rem;
     padding-bottom: 0.3125rem;
@@ -922,28 +1103,71 @@ svg path {
   }
 }
 
+@media (max-width: 47.99875em) and (max-width: 20em) {
+  .input,
+  .area {
+    width: 14.375rem;
+  }
+}
+
 @media (min-width: 20em) and (max-width: 76.625em) {
-@supports (margin-top: clamp( 2.5rem , 0.0717439294rem  +  12.1412803532vw , 9.375rem )) {
-    .footer {
-      margin-top: clamp( 2.5rem , 0.0717439294rem  +  12.1412803532vw , 9.375rem );
+@supports (max-width: clamp( 16.6875rem , -3.4670253863rem  +  100.7726269316vw , 73.75rem )) {
+    .popup__content {
+      max-width: clamp( 16.6875rem , -3.4670253863rem  +  100.7726269316vw , 73.75rem );
     }
 }
 
-@supports not (margin-top: clamp( 2.5rem , 0.0717439294rem  +  12.1412803532vw , 9.375rem )) {
-    .footer {
-      margin-top: calc(2.5rem + 6.875 * (100vw - 20rem) / 56.625);
+@supports not (max-width: clamp( 16.6875rem , -3.4670253863rem  +  100.7726269316vw , 73.75rem )) {
+    .popup__content {
+      max-width: calc(16.6875rem + 57.0625 * (100vw - 20rem) / 56.625);
     }
 }
 
-@supports (margin-bottom: clamp( 1.875rem , 0.9919977925rem  +  4.4150110375vw , 4.375rem )) {
-    .footer {
-      margin-bottom: clamp( 1.875rem , 0.9919977925rem  +  4.4150110375vw , 4.375rem );
+@supports (margin-bottom: clamp( 0.9375rem , 0.2752483444rem  +  3.3112582781vw , 2.8125rem )) {
+    .order-form__title:not(:last-child) {
+      margin-bottom: clamp( 0.9375rem , 0.2752483444rem  +  3.3112582781vw , 2.8125rem );
     }
 }
 
-@supports not (margin-bottom: clamp( 1.875rem , 0.9919977925rem  +  4.4150110375vw , 4.375rem )) {
+@supports not (margin-bottom: clamp( 0.9375rem , 0.2752483444rem  +  3.3112582781vw , 2.8125rem )) {
+    .order-form__title:not(:last-child) {
+      margin-bottom: calc(0.9375rem + 1.875 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (margin-bottom: clamp( 0.9375rem , 0.2752483444rem  +  3.3112582781vw , 2.8125rem )) {
+    .form__body:not(:last-child) {
+      margin-bottom: clamp( 0.9375rem , 0.2752483444rem  +  3.3112582781vw , 2.8125rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 0.9375rem , 0.2752483444rem  +  3.3112582781vw , 2.8125rem )) {
+    .form__body:not(:last-child) {
+      margin-bottom: calc(0.9375rem + 1.875 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (margin-top: clamp( 0.9375rem , -2.0426324503rem  +  14.9006622517vw , 9.375rem )) {
     .footer {
-      margin-bottom: calc(1.875rem + 2.5 * (100vw - 20rem) / 56.625);
+      margin-top: clamp( 0.9375rem , -2.0426324503rem  +  14.9006622517vw , 9.375rem );
+    }
+}
+
+@supports not (margin-top: clamp( 0.9375rem , -2.0426324503rem  +  14.9006622517vw , 9.375rem )) {
+    .footer {
+      margin-top: calc(0.9375rem + 8.4375 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (margin-bottom: clamp( 1.25rem , 0.1462472406rem  +  5.5187637969vw , 4.375rem )) {
+    .footer {
+      margin-bottom: clamp( 1.25rem , 0.1462472406rem  +  5.5187637969vw , 4.375rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 1.25rem , 0.1462472406rem  +  5.5187637969vw , 4.375rem )) {
+    .footer {
+      margin-bottom: calc(1.25rem + 3.125 * (100vw - 20rem) / 56.625);
     }
 }
 
@@ -971,15 +1195,15 @@ svg path {
     }
 }
 
-@supports (margin-bottom: clamp( 6.25rem , 3.4906181015rem  +  13.7969094923vw , 14.0625rem )) {
+@supports (margin-bottom: clamp( 3.125rem , -0.7381346578rem  +  19.3156732892vw , 14.0625rem )) {
     .what {
-      margin-bottom: clamp( 6.25rem , 3.4906181015rem  +  13.7969094923vw , 14.0625rem );
+      margin-bottom: clamp( 3.125rem , -0.7381346578rem  +  19.3156732892vw , 14.0625rem );
     }
 }
 
-@supports not (margin-bottom: clamp( 6.25rem , 3.4906181015rem  +  13.7969094923vw , 14.0625rem )) {
+@supports not (margin-bottom: clamp( 3.125rem , -0.7381346578rem  +  19.3156732892vw , 14.0625rem )) {
     .what {
-      margin-bottom: calc(6.25rem + 7.8125 * (100vw - 20rem) / 56.625);
+      margin-bottom: calc(3.125rem + 10.9375 * (100vw - 20rem) / 56.625);
     }
 }
 
@@ -995,27 +1219,50 @@ svg path {
     }
 }
 
-@supports (margin-bottom: clamp( 3.75rem , 2.4254966887rem  +  6.6225165563vw , 7.5rem )) {
+@supports (margin-bottom: clamp( 1.25rem , -0.9575055188rem  +  11.0375275938vw , 7.5rem )) {
     .what__title {
-      margin-bottom: clamp( 3.75rem , 2.4254966887rem  +  6.6225165563vw , 7.5rem );
+      margin-bottom: clamp( 1.25rem , -0.9575055188rem  +  11.0375275938vw , 7.5rem );
     }
 }
 
-@supports not (margin-bottom: clamp( 3.75rem , 2.4254966887rem  +  6.6225165563vw , 7.5rem )) {
+@supports not (margin-bottom: clamp( 1.25rem , -0.9575055188rem  +  11.0375275938vw , 7.5rem )) {
     .what__title {
-      margin-bottom: calc(3.75rem + 3.75 * (100vw - 20rem) / 56.625);
+      margin-bottom: calc(1.25rem + 6.25 * (100vw - 20rem) / 56.625);
     }
 }
 
-@supports (font-size: clamp( 1.875rem , 1.7425496689rem  +  0.6622516556vw , 2.25rem )) {
+@supports (font-size: clamp( 1.25rem , 0.896799117rem  +  1.766004415vw , 2.25rem )) {
     .what__caption {
-      font-size: clamp( 1.875rem , 1.7425496689rem  +  0.6622516556vw , 2.25rem );
+      font-size: clamp( 1.25rem , 0.896799117rem  +  1.766004415vw , 2.25rem );
     }
 }
 
-@supports not (font-size: clamp( 1.875rem , 1.7425496689rem  +  0.6622516556vw , 2.25rem )) {
+@supports not (font-size: clamp( 1.25rem , 0.896799117rem  +  1.766004415vw , 2.25rem )) {
     .what__caption {
-      font-size: calc(1.875rem + 0.375 * (100vw - 20rem) / 56.625);
+      font-size: calc(1.25rem + 1 * (100vw - 20rem) / 56.625);
+    }
+}
+}
+
+@media (max-width: 47.99875em) and (min-width: 76.625em) {
+  .input,
+  .area {
+    width: 26.875rem;
+  }
+}
+
+@media (max-width: 47.99875em) and (min-width: 20em) and (max-width: 76.625em) {
+@supports (width: clamp( 14.375rem , 9.9599889625rem  +  22.0750551876vw , 26.875rem )) {
+    .input,
+    .area {
+      width: clamp( 14.375rem , 9.9599889625rem  +  22.0750551876vw , 26.875rem );
+    }
+}
+
+@supports not (width: clamp( 14.375rem , 9.9599889625rem  +  22.0750551876vw , 26.875rem )) {
+    .input,
+    .area {
+      width: calc(14.375rem + 12.5 * (100vw - 20rem) / 56.625);
     }
 }
 }
@@ -1041,6 +1288,11 @@ svg path {
 }
 
 @media (any-hover: hover) {
+  .button:hover {
+    background: -o-linear-gradient(354.8deg, #2E3192 2.23%, #B90160 99.51%);
+    background: linear-gradient(95.2deg, #2E3192 2.23%, #B90160 99.51%);
+  }
+
   .header__phone:hover {
     text-decoration: underline;
   }
@@ -1061,9 +1313,8 @@ svg path {
     text-decoration: underline;
   }
 
-  .main__button:hover {
-    background: -o-linear-gradient(354.8deg, #2E3192 2.23%, #B90160 99.51%);
-    background: linear-gradient(95.2deg, #2E3192 2.23%, #B90160 99.51%);
+  .logo-main__text:hover:after {
+    width: 100%;
   }
 
   .menu__item:hover {
